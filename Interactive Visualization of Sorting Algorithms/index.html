@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sorting Algorithm Visualizer</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="brand">
+            <div class="logo">SV</div>
+
+            <div>
+                <h1>Sorting Visualizer</h1>
+                <p>Interactive Algorithm Lab</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+
+            <span class="status-indicator">
+                <span id="statusDot"></span>
+                <span id="statusText">Ready</span>
+            </span>
+
+            <button id="themeBtn"
+                    class="icon-btn"
+                    title="Toggle theme">
+                🌙
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="app">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+                <span>Algorithms</span>
+                <span class="count">6</span>
+            </div>
+
+
+            <button class="algorithm active"
+                    data-algorithm="bubble">
+
+                <span class="algorithm-icon">🫧</span>
+
+                <span>
+                    <strong>Bubble Sort</strong>
+                    <small>Simple comparison</small>
+                </span>
+
+            </button>
+
+
+            <button class="algorithm"
+                    data-algorithm="selection">
+
+                <span class="algorithm-icon">🎯</span>
+
+                <span>
+                    <strong>Selection Sort</strong>
+                    <small>Find minimum</small>
+                </span>
+
+            </button>
+
+
+            <button class="algorithm"
+                    data-algorithm="insertion">
+
+                <span class="algorithm-icon">📌</span>
+
+                <span>
+                    <strong>Insertion Sort</strong>
+                    <small>Build sorted list</small>
+                </span>
+
+            </button>
+
+
+            <button class="algorithm"
+                    data-algorithm="merge">
+
+                <span class="algorithm-icon">🔀</span>
+
+                <span>
+                    <strong>Merge Sort</strong>
+                    <small>Divide and conquer</small>
+                </span>
+
+            </button>
+
+
+            <button class="algorithm"
+                    data-algorithm="quick">
+
+                <span class="algorithm-icon">⚡</span>
+
+                <span>
+                    <strong>Quick Sort</strong>
+                    <small>Partition based</small>
+                </span>
+
+            </button>
+
+
+            <button class="algorithm"
+                    data-algorithm="heap">
+
+                <span class="algorithm-icon">🌳</span>
+
+                <span>
+                    <strong>Heap Sort</strong>
+                    <small>Heap based</small>
+                </span>
+
+            </button>
+
+
+            <!-- COMPLEXITY -->
+            <div class="complexity-box">
+
+                <h3>Complexity</h3>
+
+                <div class="complexity-row">
+                    <span>Time</span>
+                    <strong id="timeComplexity">O(n²)</strong>
+                </div>
+
+                <div class="complexity-row">
+                    <span>Space</span>
+                    <strong id="spaceComplexity">O(1)</strong>
+                </div>
+
+            </div>
+
+
+            <!-- LEGEND -->
+            <div class="legend">
+
+                <h3>Visualization</h3>
+
+                <div>
+                    <span class="legend-color normal"></span>
+                    Normal
+                </div>
+
+                <div>
+                    <span class="legend-color compare"></span>
+                    Comparing
+                </div>
+
+                <div>
+                    <span class="legend-color swap"></span>
+                    Swapping
+                </div>
+
+                <div>
+                    <span class="legend-color sorted"></span>
+                    Sorted
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTENT -->
+        <section class="content">
+
+
+            <!-- TITLE -->
+            <section class="intro-card">
+
+                <div>
+
+                    <span class="badge">
+                        ALGORITHM VISUALIZATION
+                    </span>
+
+                    <h2 id="algorithmTitle">
+                        Bubble Sort
+                    </h2>
+
+                    <p id="algorithmDescription">
+                        Bubble Sort repeatedly compares adjacent
+                        elements and swaps them when they are
+                        in the wrong order.
+                    </p>
+
+                </div>
+
+                <div class="direction-box">
+
+                    <label for="direction">
+                        Order
+                    </label>
+
+                    <select id="direction">
+
+                        <option value="asc">
+                            Ascending ↑
+                        </option>
+
+                        <option value="desc">
+                            Descending ↓
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </section>
+
+
+            <!-- STATISTICS -->
+            <section class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">🔍</div>
+
+                    <div>
+                        <span>Comparisons</span>
+                        <strong id="comparisons">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">🔄</div>
+
+                    <div>
+                        <span>Swaps</span>
+                        <strong id="swaps">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">⏱️</div>
+
+                    <div>
+                        <span>Time</span>
+                        <strong id="time">0 ms</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">📊</div>
+
+                    <div>
+                        <span>Progress</span>
+                        <strong id="progress">0%</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- VISUALIZER -->
+            <section class="visualizer-card">
+
+                <div class="visualizer-header">
+
+                    <div>
+                        <h3>Array Visualization</h3>
+
+                        <span id="operationText">
+                            Ready to sort
+                        </span>
+                    </div>
+
+                    <div class="array-info">
+
+                        <span>
+                            Elements:
+                            <strong id="elementCount">
+                                20
+                            </strong>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visualizer">
+
+                    <div id="bars"></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CONTROLS -->
+            <section class="control-card">
+
+                <div class="main-controls">
+
+                    <button id="generateBtn"
+                            class="btn primary">
+                        🎲 Generate
+                    </button>
+
+                    <button id="startBtn"
+                            class="btn success">
+                        ▶ Start
+                    </button>
+
+                    <button id="pauseBtn"
+                            class="btn warning">
+                        ⏸ Pause
+                    </button>
+
+                    <button id="stepBtn"
+                            class="btn purple">
+                        ⏭ Step
+                    </button>
+
+                    <button id="resetBtn"
+                            class="btn danger">
+                        ↻ Reset
+                    </button>
+
+                </div>
+
+
+                <div class="settings">
+
+                    <div class="setting">
+
+                        <label for="arraySize">
+                            Array Size
+                            <strong id="sizeValue">20</strong>
+                        </label>
+
+                        <input type="range"
+                               id="arraySize"
+                               min="5"
+                               max="60"
+                               value="20">
+
+                    </div>
+
+
+                    <div class="setting">
+
+                        <label for="speed">
+                            Speed
+                            <strong id="speedValue">
+                                300 ms
+                            </strong>
+                        </label>
+
+                        <input type="range"
+                               id="speed"
+                               min="50"
+                               max="1000"
+                               value="300">
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CUSTOM ARRAY -->
+            <section class="custom-card">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h3>Custom Array</h3>
+
+                        <p>
+                            Enter numbers separated by commas.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="custom-input">
+
+                    <input type="text"
+                           id="customInput"
+                           placeholder="40, 20, 60, 10, 50, 30">
+
+                    <button id="applyBtn"
+                            class="btn primary">
+                        Apply Array
+                    </button>
+
+                </div>
+
+            </section>
+
+
+          <!-- IMPLEMENTATION -->
+<section class="code-card">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="badge">
+                CODE
+            </span>
+
+            <h3>Implementation</h3>
+
+            <p>
+                JavaScript implementation of the selected sorting algorithm.
+            </p>
+
+        </div>
+
+    </div>
+
+    <pre id="implementationCode"></pre>
+
+</section>
+
+
+<!-- PSEUDOCODE -->
+<section class="code-card">
+
+    <div class="section-heading">
+        <div>
+            <span class="badge">
+                LEARNING
+            </span>
+
+            <h3>Pseudocode</h3>
+        </div>
+    </div>
+
+    <pre id="pseudoCode">for i = 0 to n-1
+    for j = 0 to n-i-1
+        compare array[j] and array[j+1]
+        if array[j] > array[j+1]
+            swap elements</pre>
+
+</section>
+
+
+            <!-- EXPLANATION -->
+            <section class="explanation-card">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="badge">
+                            HOW IT WORKS
+                        </span>
+
+                        <h3>Algorithm Explanation</h3>
+                    </div>
+
+                </div>
+
+                <p id="longDescription">
+                    Bubble Sort works by repeatedly comparing
+                    neighboring elements. If two neighboring
+                    elements are in the wrong order, they are
+                    swapped. After each pass, the largest
+                    unsorted element moves toward the end.
+                </p>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            Sorting Algorithm Visualizer
+            <span>•</span>
+            Interactive Learning Project
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
